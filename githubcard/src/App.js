@@ -1,8 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import React from "react";
 import axios from "axios";
-import Card from "./components/Card"
+import { BrowserRouter, Link, Route } from 'react-router-dom';
+import UserCard from "./components/Card";
+import Followers from "./components/Followers";
+import Repos from "./components/Repos";
 
 let followerArray = [];
 
@@ -10,14 +12,14 @@ class App extends React.Component {
 
   state = {
     user: '' ,
-    followers: [],
     location : '',
     bio: '',
+    followers: [],
     repos: []
 
   }
    
-
+  //make api calls after the component mounts
   componentDidMount() {
     console.log("Component mounted");
     //get user data
@@ -66,17 +68,23 @@ class App extends React.Component {
   {
     
   return (
+    <BrowserRouter>
     <div className="App">
-          <Card  name = {this.state.name} 
+            <Route exact path = "/">
+          
+          <UserCard  name = {this.state.name} 
           login = {this.state.user} 
           location = {this.state.location} 
-          repos = {this.state.repos} 
           bio = {this.state.bio}
-          followers = {this.state.followers}
-
-          />
-          
+          /> 
+    </Route>
+    <Route path = "/followers" component={Followers} />
+    <Route path = "/repos" component={Repos} />
     </div>
+    
+    </BrowserRouter>
+    
+
   );
   }
 }
