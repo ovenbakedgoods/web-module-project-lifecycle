@@ -42,6 +42,6 @@
   display: block;
 }
 
-Link{
-  display: block;
+.cardlist{
+  list-style-type: none;
 }
