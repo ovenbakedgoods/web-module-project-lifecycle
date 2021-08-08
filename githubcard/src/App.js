@@ -5,12 +5,14 @@ import { BrowserRouter, Link, Route } from 'react-router-dom';
 import UserCard from "./components/Card";
 import Followers from "./components/Followers";
 import Repos from "./components/Repos";
+import UserForm from "./components/UserForm"
 
 let followerArray = [];
 
 class App extends React.Component {
 
   state = {
+    name: '',
     user: '' ,
     location : '',
     bio: '',
@@ -19,19 +21,11 @@ class App extends React.Component {
 
   }
    
-  //make api calls after the component mounts
+  //make api calls after the component mounts --> equivalent to useEffect()
+  //componentDidUpdate is equivalent to useEffect(,[])
   componentDidMount() {
     console.log("Component mounted");
     //get user data
-    axios.get("https://api.github.com/users/ovenbakedgoods")
-    .then(res => this.setState({
-      ...this.state,
-      user: res.data.login,
-      location: res.data.location,
-      bio: res.data.bio,
-    }))
-      .catch(err => console.log(err));
-     
    
         console.log("finished")
 
@@ -41,8 +35,6 @@ class App extends React.Component {
 
   render()
   {
-    console.log(this.state.repos, "log the state of the repos")
-    console.log(this.state.followers, "log the state of the followers")
   return (
     <BrowserRouter>
     <div className="App">
@@ -51,7 +43,7 @@ class App extends React.Component {
           login = {this.state.user} 
           location = {this.state.location} 
           bio = {this.state.bio}
-          /> 
+          />
     </Route>
     <Route path = "/followers"  followers ={this.state.followers}>
     <Followers />

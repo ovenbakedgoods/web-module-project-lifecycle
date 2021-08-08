@@ -19,7 +19,7 @@ const Followers = () => {
             <h2>Below is a list of your followers</h2>
             <ul>
             {followers.map(follower => {
-          return <li className="follower" key={follower.id}>{follower.login} </li>
+          return <li className="followerlist" key={follower.id}>{follower.login} </li>
             })}
             </ul>
       </div>
